@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mixture Hack Software</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #1f1f1f;
+      --bg-sidebar: #2a2a2a;
+      --text-light: #f0f0f0;
+      --accent: #4a90e2;
+      --accent-hover: #357ab8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      height: 100vh;
+      display: flex;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-right: 1px solid #333;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    .sidebar label {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      margin-top: 10px;
+    }
+
+    input[type="file"],
+    input[type="text"] {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 15px;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: var(--accent);
+      border: none;
+      padding: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    #graph {
+      width: 95%;
+      max-width: 1000px;
+      height: 500px;
+    }
+
+    #csvOutput {
+      white-space: pre-wrap;
+      background-color: #121212;
+      padding: 20px;
+      margin-top: 30px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      width: 95%;
+      max-width: 1000px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #loadingIndicator {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 10px;
+    }
+
+    #graphOverlay {
+      position: absolute;
+      top: 34%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: rgba(255, 255, 255, 0.08);
+      font-weight: bold;
+      pointer-events: none;
+      text-align: center;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Mixture Hack Software</h2>
+      <label for="mixtureInput">Mixture Image:</label>
+      <input type="file" id="mixtureInput" accept="image/*" />
+
+      <label for="ingredientInput">Ingredient Images:</label>
+      <input type="file" id="ingredientInput" accept="image/*" multiple />
+
+      <label for="concentrationInput">Ingredient Concentrations:</label>
+      <input type="text" id="concentrationInput" placeholder="e.g. 5 8.33 16.67 ..." />
+
+      <button id="runButton">Run Analysis</button>
+
+      <div id="loadingIndicator">
+        <div class="spinner"></div>
+        Processing...
+      </div>
+    </div>
+
+    <div class="main">
+      <div id="graphOverlay">Mixture Hack Software</div>
+      <div id="graph"></div>
+      <div id="csvOutput">TLC output will appear here</div>
+    </div>
+  </div>
+
+  <script src="plotlygraph_csv_2.js"></script>
+</body>
+</html>
