@@ -6,7 +6,7 @@ source venv/bin/activate
 
 # Install Python dependencies in the virtual environment
 pip install --upgrade pip
-pip install -r TLC-Final-Python/requirements.txt
+pip install -r requirements.txt
 
 # Start your server
 node index.js
