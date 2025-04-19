@@ -55,6 +55,7 @@ app.post('/run-analysis', multiUpload, (req, res) => {
     let errorData = '';
   
     pythonProcess.stdout.on('data', (data) => {
+      console.log(`stdout: ${data.toString()}`);
       resultData += data.toString();
     });
   
@@ -73,6 +74,9 @@ app.post('/run-analysis', multiUpload, (req, res) => {
       } else {
         res.send({ csv: resultData });
       }
+
+      console.log('Python script finished with code', code);
+      console.log('Final result:', resultData);
     });
   });
   
