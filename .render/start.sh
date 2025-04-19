@@ -9,4 +9,5 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Start your server
+npm install
 node index.js
