@@ -156,6 +156,9 @@ def run_analysis_json():
 
     mixture = initailize_mixture(image_mixture)
     ingredients = [initialize_ingredient(path, concentration_values) for path in ingredient_image_paths]
+    
+    print("Mixture:", mixture, file=sys.stderr)
+    print("Ingredient:", ingredients, file=sys.stderr)
 
     tlc_analyzer = TLCAnalyzer(mixture, ingredients)
     final_result = tlc_analyzer.get_result_json()
