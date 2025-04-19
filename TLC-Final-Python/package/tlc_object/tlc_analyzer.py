@@ -39,16 +39,17 @@ class TLCAnalyzer:
         return csv_string
 
     def get_result_json(self):
-        ratios = {name: float(value) for name, value in self.estimated_concentration.items() if name.endswith("_ratio")}
-        # 1st Column: Mixture Name
-        # n Columns: Ingredient Ratios
-        result = {
-            "Mixture": self.mixture_object.name,
-            "Ratios": ratios
+        ratios = {
+            name: float(value)
+            for name, value in self.estimated_concentration.items()
+            if name.endswith("_ratio")
         }
-        
-        result_json = json.dumps(result, indent=4)
-        return result_json
+        return {
+            "Mixture": self.mixture_object.name,
+            "Ratios": ratios,
+            "Solved": len(ratios) > 0
+        }
+
     
     def print_result(self):
         # Print Equations
@@ -264,7 +265,7 @@ class TLCAnalyzer:
         return equations
     
     def _solve_equations(self):
-        self.show_data() #check
+        # self.show_data() #check
         
         # Select equations with highest R² value
         equations = sorted(self.equations.items(), key=lambda x: x[1]['R_squared'], reverse=True)
@@ -275,9 +276,6 @@ class TLCAnalyzer:
         # print("-" * 80)
         
         selected_equations = equations[:len(self.ingredient_object_list)]
-        
-        print(f"Total equations generated: {len(equations)}") #check
-        print(f"Selected equations for solving: {len(selected_equations)}") #check
 
         # print("\nSelected equations:")
         # print("-" * 80)
