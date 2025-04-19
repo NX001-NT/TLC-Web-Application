@@ -1,5 +1,6 @@
 import logging
 import sys
+import json
 from package.io import image_io
 from package.tlc_object.ingredient import Ingredient
 from package.tlc_object.mixture import Mixture
@@ -136,7 +137,30 @@ def run_analysis():
     print(csv_data)
 
     return csv_data
+
+def run_analysis_json():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mixture_image_path")
+    parser.add_argument("ingredient_image_paths", nargs='+')
+    parser.add_argument("--concentrations", type=str, default="5 8.33 16.67 33.33 50 66.67 83.33 100")
+
+    args = parser.parse_args()
+
+    image_mixture = args.mixture_image_path
+    ingredient_image_paths = args.ingredient_image_paths
+    concentration_values = [float(x) for x in args.concentrations.strip().split()]
+
+    mixture = initailize_mixture(image_mixture)
+    ingredients = [initialize_ingredient(path, concentration_values) for path in ingredient_image_paths]
+
+    tlc_analyzer = TLCAnalyzer(mixture, ingredients)
+    final_result = tlc_analyzer.get_result_json()
+
+    # 👇 THIS is the key fix!
+    print(json.dumps(final_result))
+
+    return final_result
   
 if __name__ == '__main__':
     # logging.basicConfig(format='%(name)s -> %(funcName)s: %(message)s', level=logging.INFO)
-    run_analysis()
+    run_analysis_json()
