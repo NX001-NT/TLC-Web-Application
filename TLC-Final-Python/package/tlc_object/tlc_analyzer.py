@@ -264,7 +264,7 @@ class TLCAnalyzer:
         return equations
     
     def _solve_equations(self):
-        # self.show_data()
+        self.show_data() #check
         
         # Select equations with highest R² value
         equations = sorted(self.equations.items(), key=lambda x: x[1]['R_squared'], reverse=True)
@@ -275,6 +275,10 @@ class TLCAnalyzer:
         # print("-" * 80)
         
         selected_equations = equations[:len(self.ingredient_object_list)]
+        
+        print(f"Total equations generated: {len(equations)}") #check
+        print(f"Selected equations for solving: {len(selected_equations)}") #check
+
         # print("\nSelected equations:")
         # print("-" * 80)
         # for eq in selected_equations:
