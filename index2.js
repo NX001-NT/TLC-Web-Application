@@ -39,6 +39,9 @@ app.post('/run-analysis', multiUpload, (req, res) => {
   const mixtureImagePath = path.join(__dirname, req.files['mixtureImage'][0].path);
   const ingredientImagePaths = req.files['ingredientImages'].map(file => path.join(__dirname, file.path));
 
+  console.log("Mixture Image:", req.files.mixtureImage[0].path);
+  console.log("Ingredient Images:", req.files.ingredientImages.map(f => f.path));
+
   const pythonArgs = [
     path.join(__dirname, 'TLC-Final-Python', 'main.py'),
     mixtureImagePath,
@@ -93,10 +96,10 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-//app.listen(PORT, () => {
-//  console.log(`Server is running at http://localhost:${PORT}`);
-//});
-
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+//app.listen(PORT, () => {
+//  console.log(`Server is running on port ${PORT}`);
+//});
