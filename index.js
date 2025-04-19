@@ -18,6 +18,7 @@ app.use(express.json());
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
+  console.log("Created 'uploads' folder");
 }
 
 const storage = multer.diskStorage({
@@ -29,7 +30,7 @@ const storage = multer.diskStorage({
     }
   });
   
-  const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 const multiUpload = upload.fields([
   { name: 'mixtureImage', maxCount: 1 },
@@ -55,8 +56,8 @@ app.post('/run-analysis', multiUpload, (req, res) => {
     let errorData = '';
   
     pythonProcess.stdout.on('data', (data) => {
-      console.log(`stdout: ${data.toString()}`);
       resultData += data.toString();
+      console.log(`stdout: ${data.toString()}`);
     });
   
     pythonProcess.stderr.on('data', (data) => {
