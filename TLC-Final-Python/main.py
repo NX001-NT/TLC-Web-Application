@@ -161,7 +161,7 @@ def run_analysis_json():
     print("Ingredient:", ingredients, file=sys.stderr)
 
     tlc_analyzer = TLCAnalyzer(mixture, ingredients)
-    print("Result:", tlc_analyzer.print_result())
+    print("Result:", tlc_analyzer.print_result(), file=sys.stderr)
     final_result = tlc_analyzer.get_result_json()
 
     # 👇 THIS is the key fix!
