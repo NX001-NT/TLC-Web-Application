@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('concentrations', concentrationString);
       
       try {
-        const response = await fetch('http://localhost:3000/run-analysis', {
+        const response = await fetch("/run-analysis", {
           method: 'POST',
           body: formData,
         });
