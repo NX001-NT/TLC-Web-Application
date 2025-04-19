@@ -134,6 +134,8 @@ def run_analysis():
     tlc_analyzer = TLCAnalyzer(mixture, ingredients)
     csv_data = tlc_analyzer.get_result_csv()
     print(csv_data)
+    
+    return csv_data
 
 
 if __name__ == '__main__':
