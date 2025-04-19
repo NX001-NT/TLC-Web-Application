@@ -11,4 +11,4 @@ pip install -r requirements.txt
 # Start your server
 npm install
 npm install express-fileupload
-node index.js
+node index2.js
