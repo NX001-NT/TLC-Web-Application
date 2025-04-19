@@ -150,6 +150,9 @@ def run_analysis_json():
     ingredient_image_paths = args.ingredient_image_paths
     concentration_values = [float(x) for x in args.concentrations.strip().split()]
 
+    print("Mixture path:", image_mixture, file=sys.stderr)
+    print("Ingredient paths:", ingredient_image_paths, file=sys.stderr)
+
     mixture = initailize_mixture(image_mixture)
     ingredients = [initialize_ingredient(path, concentration_values) for path in ingredient_image_paths]
 
