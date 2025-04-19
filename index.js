@@ -6,7 +6,8 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+//const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,6 +75,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'plotly_csv_2.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+//app.listen(PORT, () => {
+//  console.log(`Server is running at http://localhost:${PORT}`);
+//});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
 });
