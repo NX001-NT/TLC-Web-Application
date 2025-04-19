@@ -72,7 +72,7 @@ app.post('/run-analysis', multiUpload, (req, res) => {
   });
   
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'plotly_csv_2.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 //app.listen(PORT, () => {
