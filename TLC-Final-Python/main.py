@@ -130,21 +130,13 @@ def run_analysis():
     # Now use concentration_values inside initialize_ingredient
     mixture = initailize_mixture(image_mixture)
     ingredients = [initialize_ingredient(path, concentration_values) for path in ingredient_image_paths]
-    
-    print("Mixture image:", mixture)
-    print("Ingredient images:", ingredients)
-    print("Concentrations:", concentration_values)
 
-    print("Solving system...")
-    try:
-        tlc_analyzer = TLCAnalyzer(mixture, ingredients)
-        csv_data = tlc_analyzer.get_result_csv()
-        print(csv_data)
-    except Exception as e:
-        print(f"ERROR: {e}")
+    tlc_analyzer = TLCAnalyzer(mixture, ingredients)
+    csv_data = tlc_analyzer.get_result_csv()
+    print(csv_data)
+
     return csv_data
-
-
+  
 if __name__ == '__main__':
     # logging.basicConfig(format='%(name)s -> %(funcName)s: %(message)s', level=logging.INFO)
     run_analysis()
